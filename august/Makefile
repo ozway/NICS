@@ -11,7 +11,7 @@ cleanpdf:
 
 
 tar: 
-	tar czvf ../augustbackup.tar.gz ../august/*.tex ../august/*.pdf
+	tar czvf ../augustNICS.tar.gz ../august/*.tex ../august/*.pdf
 
 backup: 
-	tar czvf ../augustbackup.tar.gz ../august/*.tex ../august/*.pdf
+	tar czvf ../augustNICS.tar.gz ../august/*.tex ../august/*.pdf

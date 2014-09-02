@@ -77,25 +77,48 @@
 %\tableofcontents
 
 
-\setcounter{section}{0} %week number minus 1
+\setcounter{section}{3} %week number minus 1
 \setcounter{subsection}{-1}
 \setcounter{subsubsection}{0}
 
-\section{Week of August XXth-XXth}
+\section{Week of August 25th-29th}
 \subsection{Goals for the Week}
 \begin{enumerate}
-
+	\item Put these worklogs in the GitHub and send to Kwai
+	\item Get DAKOTA running
+	\item See if I can get Source Dakota running (do not devote toooo much time to this)
+	\item Get some hard data from a PSUADE example
 \end{enumerate}
 
-\subsection{Progress / Notes}
-%%% 	writeGoals could be helpful	%%%
+\subsection{Progress/Notes}
+\subsubsection{Put these worklogs in the GitHub and send to Kwai}
+Done. ozway/NICS
 
-\subsubsection{}
+Also adding it to the .svn repo on Darter
 
+\subsubsection{Get DAKOTA running}
+
+\subsubsection{See if I can get Source Dakota running (do not devote toooo much time to this)}
+
+\subsubsection{Get some hard data from a PSUADE example}
+In the psuade interactive mode, I can generate an example.
+
+On star1, I've begun writing up the rosenbrock code as an example. I can't find the way to set up the input and output file, and I don't really want to use the interactive mode of loading and unloading data.
+
+I think it's in the APPLICATION section of psuade.in, sicne that's where the path to the driver code is.
+
+By default, the filename seems to be ``psuadeApps\_ct.in.$\langle$sample number$\rangle$"
+
+Darter may have more information? I ran the throttling on Darter comparing a one step approach to a two step approach (right?)
+
+It's notable: The Rosenbrock Code does not successfully run on my Ubuntu.
+
+Given that we aren't using DAKOTA anymore, and given that Star1 runs the Ising Model, rosenbrock code, and PSUADE with fantastic speed, star1 will likely be the work machine of choice.
 
 \subsection{Goals for next Week}
 \begin{enumerate}
-\item Future Goal
+\item Hard Data from PSUADE Examples
+\item If extra time, work on DAKOTA
 \end{enumerate}
 
 
