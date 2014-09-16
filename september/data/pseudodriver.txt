@@ -1,0 +1,8 @@
+Parse command line arguments (input filename, output filename)
+
+Potentially, forego the files completely,
+just use tuple comms to talk to the simulation
+
+invoke the DIEL to run the simulation, using the input from psuade
+
+write the output for psuade

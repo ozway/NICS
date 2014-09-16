@@ -84,6 +84,74 @@
 \section{Week of September 15th-19th}
 \subsection{Goals for the Week}
 %Paste output from writeGoals
+\begin{enumerate}
+	\item Blueprint adding PSUADE to the DIEL
+	\item PSUADE Parallelism (Can we control the number of parallel operations?)
+	\item Hard psuade Data (make some pictures?)
+	\item Home Matlab Installation (ssh is slow for imaging)
+\end{enumerate}
+
+
+\subsection{Progress/Notes}
+
+\subsubsection{Blueprint adding PSUADE to the DIEL}
+
+There's two different ways I've thought about running PSUADE on the DIEL. In my opinion, the first option is much better. It captures the high level of control that we have with PSUADE together with the various advantages of the tuple space.
+
+\begin{itemize}
+	\item Tuple dump to psuadeData
+\end{itemize}
+
+Essentially, what we would do is dump the results from running the Ising Model into the PSUADE module, then format the dump from the tuple space into information readable by PSUADE. The psuade data file has this format:
+\verbatiminput{data/psuadedataSAMPLE.txt}
+
+It will either be a function of simple file I/O 
+
+Advantages:
+\begin{enumerate}
+	\item Once the data has been written to psuadeData, we can reuse it multiple times for multiple visualizations or calculations.
+	\item We have complete control over how the applications are run
+\end{enumerate}
+
+Disadvantages:
+\begin{enumerate}
+	\item Requires simulations to store their inputs AND outputs into the tuple space
+	\item We'll have to alter the simulations (or write a wrapper) to make the simulation write all the appropriate output
+	\item As we alter the tuple space (specifically, the ability to dump from the tuple space), we may have to alter the conversion
+\end{enumerate}
+
+There is another way to run PSUADE in the DIEL
+
+\begin{itemize}
+	\item PSUADE's Way\\
+\end{itemize}
+
+In the PSUADE input file, there is a line for "driver = (path to simulator)". You can put anything here, but most notably, we could do a C, python, or bash script that calls the DIEL for performing its operations. A shell script would likely be easier to maintain.
+
+
+Pseudocode for dieldriver.sh:
+\verbatiminput{data/pseudodriver.txt}
+
+Advantages:
+\begin{enumerate}
+	\item Works out of the box, aside from writing the small script
+	\item May be able to use PSUADE gendriver to make a python driver as a starting point
+\end{enumerate}
+Disadvantages:
+\begin{enumerate}
+	\item All the disadvantages of DAKOTA, with none of the advantages of PSUADE
+	\item Slower
+	\item Worse on supercomputer
+	\item Must write a new script for every application
+\end{enumerate}
+
+
+
+\subsubsection{PSUADE Parallelism (Can we control the number of parallel operations?)}
+
+\subsubsection{Hard psuade Data (make some pictures?)}
+
+\subsubsection{Home Matlab Installation (ssh is slow for imaging)}
 
 
 
