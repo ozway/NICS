@@ -1,0 +1,127 @@
+
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+
+\usepackage{ulem}
+\newcommand\NoIndent[1]{%
+  \par\vbox{\parbox[t]{\linewidth}{#1}}%
+}
+
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+% \geometry{margin=2in} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+
+\usepackage{graphicx} % support the \includegraphics command and options
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+% These packages are all incorporated in the memoir class to one degree or another...
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+%%% END Article customizations
+
+
+\usepackage{verbatim}
+\usepackage{amsmath}
+
+
+
+
+
+
+\title{Blueprint for adding PSUADE to the DIEL}
+\author{Logan Brown}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+\begin{document}
+\maketitle
+%\tableofcontents
+
+
+There's two different ways I've thought about running PSUADE on the DIEL. In my opinion, the first option is much better. It captures the high level of control that we have with PSUADE together with the various advantages of the tuple space.
+
+\section{Tuple dump to psuadeData}
+
+Essentially, what we would do is dump the results from running the Ising Model into the PSUADE module, then format the dump from the tuple space into information readable by PSUADE. The psuade data file has this format:
+\verbatiminput{data/psuadedataSAMPLE.txt}
+
+It will either be a function of simple file I/O 
+
+Advantages:
+\begin{enumerate}
+	\item Once the data has been written to psuadeData, we can reuse it multiple times for multiple visualizations or calculations.
+	\item We have complete control over how the applications are run
+\end{enumerate}
+
+Disadvantages:
+\begin{enumerate}
+	\item Requires simulations to store their inputs AND outputs into the tuple space
+	\item We'll have to alter the simulations (or write a wrapper) to make the simulation write all the appropriate output
+	\item As we alter the tuple space (specifically, the ability to dump from the tuple space), we may have to alter the conversion
+\end{enumerate}
+
+There is another way to run PSUADE in the DIEL
+
+\section{PSUADE's Way}
+
+In the PSUADE input file, there is a line for "driver = (path to simulator)". You can put anything here, but most notably, we could do a C, python, or bash script that calls the DIEL for performing its operations. A shell script would likely be easier to maintain.
+
+
+Pseudocode for dieldriver.sh:
+\verbatiminput{data/pseudodriver.txt}
+
+Advantages:
+\begin{enumerate}
+	\item Works out of the box, aside from writing the small script
+	\item May be able to use PSUADE gendriver to make a python driver as a starting point
+\end{enumerate}
+Disadvantages:
+\begin{enumerate}
+	\item All the disadvantages of DAKOTA, with none of the advantages of PSUADE
+	\item Slower
+	\item Worse on supercomputer
+	\item Must write a new script for every application
+\end{enumerate}
+
+
+\end{document}
