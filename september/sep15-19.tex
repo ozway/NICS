@@ -86,6 +86,7 @@
 %Paste output from writeGoals
 \begin{enumerate}
 	\item Blueprint adding PSUADE to the DIEL
+	\item Ising Model on DIEL
 	\item PSUADE Parallelism (Can we control the number of parallel operations?)
 	\item Hard psuade Data (make some pictures?)
 	\item Home Matlab Installation (ssh is slow for imaging)
@@ -100,7 +101,12 @@ Path to the Function - ~/PSUADE/Src/DataIo/PsuadeData.cpp
 
 \verbatiminput{data/readPSUADE.cpp}
 
-Bad news? The file is 3920 lines long.
+At first look, it appears we can replace fscanf with tget for properly tagged tuple data
+
+
+\subsubsection{ISING Model}
+
+Once we do add PSUADE to the DIEL, we want to be able to run examples. The Ising Model is one such example. I looked at the module that was currently on the DIEL, and it had an exchange acceptance rate of 0. That's evidence of bad MPI communication. I've sent Jason an updated version. We'll likely want to adapt it to use Tuple Comms, rather than just MPI comms.
 
 
 \subsubsection{Blueprint adding PSUADE to the DIEL (With File Writing)}
@@ -166,7 +172,8 @@ Disadvantages:
 
 \subsection{Goals for next Week}
 \begin{enumerate}
-\item Future Goal
+	\item Look at readPsuadeIO function (replacing fscanf with tget?)
+	\item Test Ising model once Jason adds it to the DIEL
 \end{enumerate}
 
 
