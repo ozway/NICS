@@ -11,7 +11,7 @@ cleanpdf:
 
 
 tar: 
-	tar czvf ../septemberNICS.tar.gz ../september/*.tex ../september/*.pdf ../september/data/*
+	tar czvf ../septemberNICS.tar.gz ../september/*.tex ../september/*.pdf
 
 backup: 
-	tar czvf ../septemberNICS.tar.gz ../september/*.tex ../september/*.pdf ../september/data/*
+	tar czvf ../septemberNICS.tar.gz ../september/*.tex ../september/*.pdf
