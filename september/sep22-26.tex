@@ -14,11 +14,14 @@
 \setcounter{subsection}{-1}
 \setcounter{subsubsection}{0}
 
-\section{Week of September XXth-XXth}
+\section{Week of September 22nd-26th}
 \subsection{Goals for the Week}
 %Paste output from writeGoals
 \begin{enumerate}
-	\item Look at readPsuadeIO function (replacing fscanf with tget?)
+	\item Build a test module
+	\item Install PSUADE 1.7.2
+	\item \sout{Look at readPsuadeIO function (replacing fscanf with tget?)}
+	\item PSUADE Module Work
 	\item Test Ising model once Jason adds it to the DIEL
 	\item Look into Optimizer (Bobyqa?, can it optimize after running?)
 \end{enumerate}
@@ -27,9 +30,47 @@
 
 \subsubsection{Build a test module}
 
+Test module is build built, see star1:iel-2.0/LBrown/hello
+
+I started with a basic hello world, and made changes.
+
+\begin{enumerate}
+\item Change main to the name of the module. In this case, the function was LBhello in LBhello.c
+\item Change (int argc, char** argc) to (IEL\_exec\_info\_t *exec\_info)
+\item Add the following includes:
+\verbatiminput{misc/IELheaders.txt}
+\item Compile as a library, including the IEL header files.
+\item Driver Code. Writing a driver code is outside the purview of this weekly report.
+\item Write a makefile. I'll include mine in the misc folder, but it will obviously need to be customized to other applications
+\end{enumerate}
+
+
+I began attempting some basic Tuple Comms, but that fell flat.
+
 \subsubsection{Install PSUADE 1.7.2}
 
-\subsubsection{Look at readPsuadeIO function (replacing fscanf with tget?)}
+Installed locally and on Star1. Running 'make test' in the build directory now passes all the tests, on both machines.
+
+The install directions are in psuade-log/psuade.pdf
+
+
+\subsubsection{\sout{Look at readPsuadeIO function (replacing fscanf with tget?)}}
+\subsubsection{PSUADE Module Work}
+
+Main/Psuade.cpp is a red herring. It only parses the command line arguments, which is something I'm not sure how we do, or if we even want to do it. If you call PSUADE with an input file, it runs "psuade-$>$getInputFromFile", and then "psuade-$>$run();"
+
+Here are our main concerns, based on my last conversation with Kwai
+
+\begin{enumerate}
+\item Gutting main/run and replacing with a module
+\item Passing command line argument (input file)
+\item MPI\_COMM\_WORLD may be an obstacle, even in serial?
+\item Shared Library Functions
+\item Dakota?
+\end{enumerate}
+
+\verbatiminput{misc/psuadeRun.txt}
+
 
 \subsubsection{Test Ising model once Jason adds it to the DIEL}
 
@@ -39,7 +80,10 @@
 
 \subsection{Goals for next Week}
 \begin{enumerate}
-\item Future Goal
+\item PSUADE 1.7.2 on Darter
+\item PSUADE Module that runs as usual
+\item Figure out Command Line arguments for DIEL
+\item Find out what's going on with DAKOTA calling PSUADE
 \end{enumerate}
 
 
