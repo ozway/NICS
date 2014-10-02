@@ -1,0 +1,64 @@
+\input{../header.tex}
+
+\title{Work Log for September}
+\author{Logan Brown}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+\begin{document}
+\maketitle
+%\tableofcontents
+
+
+\setcounter{section}{4} %week number minus 1
+\setcounter{subsection}{-1}
+\setcounter{subsubsection}{0}
+
+\section{Week of September 29th-October 3rd}
+\subsection{Goals for the Week}
+%Paste output from writeGoals
+\begin{enumerate}
+	\item PSUADE 1.7.2 on Darter
+	\item PSUADE Module that runs as usual
+	\item Figure out Command Line arguments for DIEL
+	\item Find out what's going on with DAKOTA calling PSUADE
+\end{enumerate}
+
+
+
+\subsection{Progress/Notes}
+
+\subsubsection{PSUADE 1.7.2 on Darter}
+
+
+\subsubsection{PSUADE Module that runs as usual}
+
+Building the module comes up with the following error
+
+\verbatiminput{misc/sep29psuademakeerror.txt}
+
+I think it's caused by things (such as INT, FLOAT, DOUBLE, and SUCCESS) being declared elsewhere in PSUADE, then being linked to in MPICXX. \sout{I've tried setting the compiler flags in CMakeCache.txt, but no such luck.}
+
+Solution! cmake -DMPICH\_SKIP\_MPICXX
+
+Also did the cmake library path this way.
+
+ALSO
+
+To fix the grand scheme, use ar command to attach psuademodule function onto libpsuade.so
+
+\subsubsection{Figure out Command Line arguments for DIEL}
+
+\subsubsection{Find out what's going on with DAKOTA calling PSUADE}
+
+
+
+\subsection{Goals for next Week}
+\begin{enumerate}
+\item Fix PSUADE 1.7.2 on Darter
+\item Attempt ar addition of main to libpsuade.so
+\item if ar fails, find other methods to build the psuade module
+\end{enumerate}
+
+
+\end{document} %End of day document, REMOVE
