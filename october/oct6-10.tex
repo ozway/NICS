@@ -1,0 +1,72 @@
+\input{../header.tex}
+
+\title{Work Log for October}
+\author{Logan Brown}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+\begin{document}
+\maketitle
+%\tableofcontents
+
+
+\setcounter{section}{0} %week number minus 1
+\setcounter{subsection}{-1}
+\setcounter{subsubsection}{0}
+
+\section{Week of October 6th-10th}
+\subsection{Goals for the Week}
+%Paste output from writeGoals
+\begin{enumerate}
+	\item Fix PSUADE 1.7.2 on Darter
+	\item Attempt ar addition of main to libpsuade.so
+	\item if ar fails, find other methods to build the psuade module
+
+\end{enumerate}
+
+\subsection{Progress/Notes}
+
+\subsubsection{Fix PSUADE 1.7.2 on Darter}
+
+\subsubsection{Use Dummy Main}
+
+See Src/dummyPsuade.cpp and dummyMain.cpp
+
+\subsubsection{Circle Packing Genetic Algorithm}
+
+Use a Matlab to c++ script, then add a genetic algorithm. Forget Dakota.
+
+\subsubsection{Attempt ar addition of main to libpsuade.so}
+
+ar can only be used to generate .a files, not shared .so libraries. Jason says this may not be a problem. Static libraries are faster, and Cray systems (darter) have limited support for shared objects.
+
+Attempt 1: Go to Makefile.in in Main. during the PSUADE make step, after PSUADE.o but before compiling the binary, add 'ar rvs libIELPsuade.a \_\_\_\_\_.o'	\\
+r - insert into an archive with replacement		\\
+v - verbose						\\
+s - 'Write an object-file index into the archive, or update an existing one, even if no other change is made to the archive.'
+
+Attempt 2: Go to build/CMakeFiles/psuade-bin.dir/build.make line 59, and add after maing Psuade.cpp.o,
+
+	
+\begin{verbatim}
+/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS)
+      -o /home/lbrown/iel-2.0/PSUADE/Src/Main/Psuade.o
+      -c /home/lbrown/iel-2.0/PSUADE/Src/Main/Psuade.cpp
+/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS)
+      -o /home/lbrown/iel-2.0/PSUADE/Src/Main/IELPsuade.o 
+      -c /home/lbrown/iel-2.0/PSUADE/Src/Main/IELPsuade.cpp
+\end{verbatim}
+
+
+\subsubsection{if ar fails, find other methods to build the psuade module}
+
+
+
+
+\subsection{Goals for next Week}
+\begin{enumerate}
+\item Future Goal
+\end{enumerate}
+
+
+\end{document} %End of day document, REMOVE
