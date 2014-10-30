@@ -1,0 +1,80 @@
+\input{../header.tex}
+
+\title{Work Log for October 12th-30th}
+\author{Logan Brown}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+\begin{document}
+\maketitle
+%\tableofcontents
+
+
+\section{Goals for the Week(s)}
+\begin{enumerate}
+\item Sphere Packing code
+\item What do we do for Dr. Gilchrist
+\item PSUADE Module
+\item Optimizer Module
+\end{enumerate}
+
+\section{Progress/Notes}
+\subsection{Sphere Packing Code}
+The sphere packing module is complete. Here's a few notes
+
+\begin{enumerate}
+	\item It uses a one dimensional array of length population*parameters.
+	\item For now, it works with a one-to-one model where each sphere pack algorithm writes to its own individual GA. This is largely because I can't find a succinct way for one GA to collect information from multiple Sphere Pack algorithms.
+	\item The GA needs to have Mutation added to it. The algorithm is just converging to distances around 1 or 2. It's still a convergence, which is cool.
+	\item 
+\end{enumerate}
+
+
+\subsection{What can we do for Mike}
+
+
+
+\subsection{PSUADE Module}
+
+\subsubsection{Picking up where we left off}
+
+Attempt 2: Go to build/CMakeFiles/psuade-bin.dir/build.make line 59, and add after maing Psuade.cpp.o,
+
+	
+\begin{verbatim}
+/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS)
+      -o /home/lbrown/iel-2.0/PSUADE/Src/Main/Psuade.o
+      -c /home/lbrown/iel-2.0/PSUADE/Src/Main/Psuade.cpp
+/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS)
+      -o /home/lbrown/iel-2.0/PSUADE/Src/Main/IELPsuade.o 
+      -c /home/lbrown/iel-2.0/PSUADE/Src/Main/IELPsuade.cpp
+\end{verbatim}
+
+The problem this generates is that cmake ignores the first set ofcommands, and instead uses the second set, so it never makes Psuade.cpp.o
+
+
+Attempt 3: Change CMakeLists.txt
+\begin{verbatim}
+add_library (psuade-lib ${LIBRARY_TYPE} ${psuade_SRC}  ${psuade_HDRS} ${PDF_SRC})
+add_library (iel-lib ${LIBRARY_TYPE} "Src/Main/IELPsuade.cpp" ${psuade_SRC}  ${psuade_HDRS} ${PDF_SRC})
+add_executable (psuade-bin Src/Main/Psuade.cpp)
+\end{verbatim}
+
+Run build as usual, then go to iel-2.0/PSUADE/build/CMakeFiles/iel-lib.dir/Src/Main to find the .o file. What to do wit hthe .o? what's in the .o?
+
+\subsubsection{dummy hello function}
+A good idea to test for a successful build, putting a dummy DIEL hello function in the libPsuade.so
+
+\subsubsection{argc, argv}
+
+\subsection{Optimizer Module}
+The optimizer functions are distinct .cpp files. It may be worthwile to compile these as their own IEL library. The main problem is the command line arguments. They are pretty intricate. 
+
+
+\section{Goals for next Week}
+\begin{enumerate}
+\item Future Goal
+\end{enumerate}
+
+
+\end{document} %End of day document, REMOVE
