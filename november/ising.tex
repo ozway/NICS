@@ -61,4 +61,15 @@
 
 \usepackage{verbatim}
 \usepackage{amsmath}
-\usepackage{pdfpages}
+
+
+\begin{document}
+
+The Ising Model is basic thermodynamics model made up of 1-dimensional unit vectors calls “spins”, existing on a 2 dimensional or 3 dimensional lattice. These spins (microstates) interact on each other in a quantifiable way which varies with temperature. We can measure the energy, magnetization, and heat capacity of the macrostate based on these interactions of the microstates.
+Our code evenly partitions the range of temperatures, then gives each process a temperature. Each process then uses Markov Chain Monte Carlo methods to approximate the distribution, using acceptance probability $\mbox{min}\{1, e^{-\beta\Delta H}\}; \beta=\frac{1}{k_BT}$, where $T$ is the temperature. The problem is that at low temperatures, the model is very likely to get stuck in an energy minimum. The solution is to use replica exchanges, to exchange data at high temperatures with data at lower temperatures. 
+
+http://jics.utk.edu/files/images/csure-reu/PDF-REPORT/Cheung-Zhao.pdf
+
+
+\end{document}
+

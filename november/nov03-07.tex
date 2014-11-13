@@ -1,0 +1,79 @@
+\input{../header.tex}
+
+\title{Work Log for November 3rd-7th}
+\author{Logan Brown}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+\begin{document}
+\maketitle
+%\tableofcontents
+
+
+\section{Goals for the Week}
+\begin{enumerate}
+\item PSUADE for the DIEL
+\item R library in DIEL
+\item C calling R in the DIEL
+\end{enumerate}
+
+\section{Progress/Notes}
+
+\subsection{PSUADE for the DIEL}
+
+\subsection{R for the DIEL}
+
+\subsubsection{R libraries}
+
+\begin{verbatim}
+./configure --enable-R-shlib --prefix=/home/lbrown/iel-2.0/EXTLIB/R/inst
+make
+make install
+\end{verbatim}
+
+
+
+\subsubsection{C calling R}
+
+I added a folder to the iel called RC.
+
+The key points of rc.c are...
+
+\begin{verbatim}
+#include <R.h>
+#include <Rinternals.h>
+#include <Rembedded.h>
+#include <stdio.h>
+#include <string.h>
+
+extern int R_running_as_main_program;   /* in ../unix/system.c */
+.
+.
+.
+	R_running_as_main_program = 0;
+	Rf_initialize_R(3, arguments);
+	Rf_mainloop();
+\end{verbatim}
+
+The rest is merely a matter of parsing and generating the command line arguments for Rf\_initialize\_R(3, arguments)
+
+I'm working on getting an example together now.
+
+
+\subsubsection{R standalone Math library}
+
+\begin{verbatim}
+/home/lbrown/iel-2.0/EXTLIB/R/R-3.1.2/src/nmath/standalone
+\end{verbatim}
+
+All of the R math functions are actually written in C. This directory has all of those c functions. For better performance, we may want to link the R standalone math library.
+
+
+\section{Goals for next Week}
+\begin{enumerate}
+\item RC example
+\item Load external R packages, use them with RC
+\end{enumerate}
+
+
+\end{document} %End of day document, REMOVE
