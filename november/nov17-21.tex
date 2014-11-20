@@ -1,0 +1,72 @@
+\input{../header.tex}
+
+\title{Work Log for November 17th-21st}
+\author{Logan Brown}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+\begin{document}
+\maketitle
+%\tableofcontents
+
+
+\section{Goals for the Week}
+\begin{enumerate}
+\item Test the arguments from the IEL .cfg file
+\item R Library
+\item PSUADE
+\item DAKOTA?
+\end{enumerate}
+
+
+\section{Progress / Notes}
+\subsection{Test the arguments from IEL .cfg file}
+
+It works!
+
+You get to it by calling
+\begin{verbatim}
+exec_info->modules[exec_info->module_num].mod_argv[i]
+\end{verbatim}
+
+It's noteworthy that ...argv\[0\] is the first argument, not the function call as in argv for C.
+
+\subsection{R Library}
+The R makefile and makefile.inc has been set up so that it should be built by running make in the EXTLIB directory.
+It's not being removed by make cleanall though? Not a problem, but... weird.
+
+\subsection{PSUADE}
+
+I redid the change in the CMakeLists.txt file that I'd already made.
+
+\begin{verbatim}
+add_library (psuade-lib ${LIBRARY_TYPE} ${psuade_SRC}  ${psuade_HDRS} ${PDF_SRC})
+add_library (iel-lib ${LIBRARY_TYPE} "Src/Main/PsuadeIEL.cpp" ${psuade_SRC}  ${psuade_HDRS} ${PDF_SRC})
+add_executable (psuade-bin Src/Main/Psuade.cpp)
+\end{verbatim}
+
+
+\sout{I'm getting a problem succesfully including the IEL\_comm.h file. Why?}
+
+DONE.
+
+By properly setting up the CMakeLists.txt...
+\begin{verbatim}
+include_directories("../../../EXECUTIVE/HYBRID/executive/")
+include_directories("../../../EXECUTIVE/HYBRID/IEL_comm/")
+include_directories("../../MPICH/mpich-shareod/include/")
+
+add_library (PsuadeModule ${LIBRARY_TYPE} "Src/Main/PsuadeIEL.cpp"
+	${psuade_SRC} ${psuade_HDRS} ${PDF_SRC})
+\end{verbatim}
+
+
+\subsection{DAKOTA}
+
+\section{Goals for next Week}
+\begin{enumerate}
+\item Future Goal
+\end{enumerate}
+
+
+\end{document} %End of day document, REMOVE
